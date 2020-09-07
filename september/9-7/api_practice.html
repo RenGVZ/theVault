@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Practice</title>
+</head>
+<body>
+  <img src="#" alt=""/>
+  <input id="input" type="text" placeholder="Search for a gif">
+  <button id="btn">Click</button>
+  <script>
+    const img = document.querySelector('img');
+    const btn = document.getElementById('btn');
+    const input = document.getElementById('input');
+
+    const getNew = () => {
+      fetch(`https://api.giphy.com/v1/gifs/translate?api_key=RWKxeBAYUzwNsEWxmRDRr8plikoy1sJm&s=${input.value}`, {mode: 'cors'})
+      .then(response => response.json())
+      .then(data => {
+        img.src = data.data.images.original.url;
+      })
+      .catch((error) => {
+        console.error("Can't find that shit yo", error);
+      });
+    };
+
+    btn.addEventListener('click', getNew);
+  </script>
+  
+</body>
+</html>
